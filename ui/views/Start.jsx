@@ -10,7 +10,12 @@ export default function Start({newRoom = {}, urlRoomId, roomFromURIError}) {
   const [{room}, {enterRoom, setProps, createRoom, listRooms}] = useJam();
   let {stageOnly = false} = newRoom;
 
-  let rooms = listRooms();
+  let rooms = [];
+  
+  (async () => {
+    rooms = await(listRooms());
+    console.log(rooms);
+  })();
 
   let submit = e => {
     e.preventDefault();
@@ -75,10 +80,9 @@ export default function Start({newRoom = {}, urlRoomId, roomFromURIError}) {
           Start room
         </button>
 
-        {rooms.map(roomInfo => (
+        {rooms?.map(roomInfo => (
         <StartRoomCard
           key={roomInfo}
-          {...{roomInfo}}
         />
         ))}
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import {useMqParser} from '../lib/tailwind-mqp';
 
-export function StartRoomCard({
+export default function StartRoomCard({
     roomInfo,
   }) {
     let mqp = useMqParser();    
