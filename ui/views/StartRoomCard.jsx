@@ -1,24 +1,23 @@
 import React from 'react';
-import {useMqParser} from '../lib/tailwind-mqp';
 
 export default function StartRoomCard({
     roomInfo,
   }) {
-    let mqp = useMqParser();    
-    const roomName = roomInfo?.room ?? 'unknown room';
-    const description = roomInfo?.description ?? '';
+    const roomId = roomInfo?.roomId ?? 'unknown-room';
+    const topic = roomInfo?.topic ?? '';
     const userCount = roomInfo?.userCount ?? -1;
+    // todo: display list of users, or first few of them as names or avatars?
     //const userInfo = roomInfo?userInfo ?? new [];
 
     return (
         <div>
             <div 
                 className="human-radius p-1 relative flex justify-center">
-                {roomName}
+                {roomId}
             </div>
             <div 
                 className="human-radius p-1 relative flex justify-center">
-                {description}
+                {topic}
             </div>
             <div 
                 className="human-radius p-1 relative flex justify-center">

@@ -10,7 +10,7 @@ export default function Start({newRoom = {}, urlRoomId, roomFromURIError}) {
   const [{room}, {enterRoom, setProps, createRoom, listRooms}] = useJam();
   let {stageOnly = false} = newRoom;
 
-  let rooms = [];
+  let rooms = []; // {"roomId":"sample","userCount":0,"userInfo":[]}];
   
   (async () => {
     rooms = await(listRooms());
@@ -66,6 +66,7 @@ export default function Start({newRoom = {}, urlRoomId, roomFromURIError}) {
           is for chatting, brainstorming, debating, jamming,
           micro-conferences and more. Press the button below to start a room.
         </p>
+        <br />
 
         <button
           onClick={submit}
@@ -80,14 +81,16 @@ export default function Start({newRoom = {}, urlRoomId, roomFromURIError}) {
           Start room
         </button>
 
-        {rooms?.map(roomInfo => (
-        <StartRoomCard
-          key={roomInfo}
-        />
-        ))}
+        {
+          rooms?.map((roomInfo) => {
+            return <StartRoomCard roomInfo={roomInfo} key={roomInfo.roomId} />
+          })
+        }
 
+        <br />
         <p style={{color: textColor}}>
-          Built by <a href="https://gitlab.com/jam-systems/jam/">Jam Systems</a> and <a href="https://github.com/diamsa/jam">Nostr Live Audio Spaces</a> Developers.
+          Built by <a href="https://gitlab.com/jam-systems/jam/">Jam Systems</a> and <br />
+          <a href="https://github.com/diamsa/jam">Nostr Live Audio Spaces</a> Developers.
         </p>
       </div>
     </div>
