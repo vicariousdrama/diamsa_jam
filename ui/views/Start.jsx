@@ -4,10 +4,13 @@ import {useJam} from '../jam-core-react';
 import {colors, isDark} from '../lib/theme';
 import * as bip39 from '@scure/bip39';
 import { wordlist } from '@scure/bip39/wordlists/english';
+import StartRoomCard from './StartRoomCard';
 
 export default function Start({newRoom = {}, urlRoomId, roomFromURIError}) {
-  const [{room}, {enterRoom, setProps, createRoom}] = useJam();
+  const [{room}, {enterRoom, setProps, createRoom, listRooms}] = useJam();
   let {stageOnly = false} = newRoom;
+
+  let rooms = listRooms();
 
   let submit = e => {
     e.preventDefault();
@@ -71,6 +74,13 @@ export default function Start({newRoom = {}, urlRoomId, roomFromURIError}) {
         >
           Start room
         </button>
+
+        {rooms.map(roomInfo => (
+        <StartRoomCard
+          key={roomInfo}
+          {...{roomInfo}}
+        />
+        ))}
 
         <p style={{color: textColor}}>
           Built by <a href="https://gitlab.com/jam-systems/jam/">Jam Systems</a> and <a href="https://github.com/diamsa/jam">Nostr Live Audio Spaces</a> Developers.
