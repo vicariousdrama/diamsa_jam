@@ -47,17 +47,22 @@ function handleMessageFromServer(serverConnection, msg) {
     );
     return;
   }
+  let isok = true;
   if (topic === 'response') {
-    sendMessage(connection, {t: 'response', d: data, r: requestId});
+    isok = sendMessage(connection, {t: 'response', d: data, r: requestId});
   } else if (requestId === undefined) {
-    sendMessage(connection, {t: 'server', d: {t: topic, d: data}});
+    isok = sendMessage(connection, {t: 'server', d: {t: topic, d: data}});
   } else {
     newForwardRequest(serverConnection, requestId);
-    sendMessage(connection, {
+    isok = sendMessage(connection, {
       t: 'server',
       d: {t: topic, d: data},
       r: requestId,
     });
+  }
+  if (isok===false) {
+    // 2023122: cleanup and remove bad peer from map?
+    connection.ws.close();
   }
 }
 
@@ -95,8 +100,13 @@ async function handleMessage(connection, roomId, msg) {
       // send to one specific peer
       let {p: receiverId} = msg;
       let receiver = getConnections(roomId).find(c => c.peerId === receiverId);
+      let isok=true;
       if (receiver !== undefined) {
-        sendMessage(receiver, {t: 'direct', d: data, p: senderId});
+        isok=sendMessage(receiver, {t: 'direct', d: data, p: senderId});
+      }
+      if (isok===false) {
+        // 2023122: cleanup and remove bad peer from map?
+        receiver.ws.close();
       }
       break;
     }
@@ -104,9 +114,15 @@ async function handleMessage(connection, roomId, msg) {
       // send to all mods
       let outgoingMsg = {t: 'direct', d: data, p: senderId};
       let {moderators = []} = (await get('rooms/' + roomId)) ?? {};
+      let isok=true;
       for (let receiver of getConnections(roomId)) {
+        let isok=true;
         if (moderators.includes(getPublicKey(receiver))) {
-          sendMessage(receiver, outgoingMsg);
+          isok=sendMessage(receiver, outgoingMsg);
+        }
+        if (isok===false) {
+          // 2023122: cleanup and remove bad peer from map?
+          receiver.ws.close();
         }
       }
       break;
@@ -313,7 +329,9 @@ function getConnections(roomId) {
   return [...connections];
 }
 function getPeers(roomId) {
-  return getConnections(roomId).map(c => c.peerId);
+  let connections = getConnections(roomId);
+  let peers = connections.map(c => c.peerId);
+  return peers;
 }
 
 // p2p pub sub
