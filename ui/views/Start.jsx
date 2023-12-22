@@ -101,8 +101,10 @@ export default function Start({newRoom = {}, urlRoomId, roomFromURIError}) {
         <br />
         <div style={{color: textColor}} className="jam">
           <p style={{color: textColor, backgroundColor: roomColors.background}} className="room-header">
-          Built by <a href="https://gitlab.com/jam-systems/jam/">Jam Systems</a> and <br />
-          <a href="https://github.com/diamsa/jam">Nostr Live Audio Spaces</a> Developers.
+          Built by Jam Systems and Nostr Live Audio Spaces Developers.
+          </p>
+          <p style={{color: textColor, backgroundColor: roomColors.background}} className="room-header">
+          Download from <a href="https://github.com/diamsa/jam">github.com/diamsa/jam</a> to host and run your own instance.
           </p>
         </div>
       </div>
