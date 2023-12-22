@@ -10,22 +10,6 @@ export default function Start({newRoom = {}, urlRoomId, roomFromURIError}) {
   const [loadingRooms, setLoadingRooms] = useState(false);
   const [roomList, setRoomList] = useState([]);
   const [{room}, {enterRoom, setProps, createRoom, listRooms}] = useJam();
-
-  const jamHost = process.env.JAM_HOST || 'beta.jam.systems';
-  const jamSchema = process.env.JAM_SCHEMA || 'https://';
-  const urls = {
-    jam: process.env.JAM_URL || `${jamSchema}${jamHost}`,
-    pantry: process.env.JAM_PANTRY_URL || `${jamSchema}${jamHost}/_/pantry`,
-    stun: process.env.JAM_STUN_SERVER || `stun:stun.${jamHost}:3478`,
-    turn: process.env.JAM_TURN_SERVER || `turn:turn.${jamHost}:3478`,
-    turnCredentials: {
-      username: process.env.JAM_TURN_SERVER_USERNAME || 'test',
-      credential: process.env.JAM_TURN_SERVER_CREDENTIAL || 'yieChoi0PeoKo8ni',
-    },
-  };
-  const jamServerName = process.env.SERVER_NAME || 'Jam';
-  const jamServerLogo = process.env.SERVER_LOGO || `${urls.jam}/img/jam-app-icon.jpg`;
-  const jamServerOperator = process.env.SERVER_OPERATOR || 'a Friendly Nostrich';
   
   let {stageOnly = false} = newRoom;
 
@@ -116,12 +100,9 @@ export default function Start({newRoom = {}, urlRoomId, roomFromURIError}) {
 
         <br />
         <div style={{color: textColor}} className="jam">
-          <p style={{color: textColor}} className="room-header">
+          <p style={{color: textColor, backgroundColor: roomColors.background}} className="room-header">
           Built by <a href="https://gitlab.com/jam-systems/jam/">Jam Systems</a> and <br />
           <a href="https://github.com/diamsa/jam">Nostr Live Audio Spaces</a> Developers.
-          </p>
-          <p style={{color: textColor}} className="room-header">
-          Operated by {jamServerOperator}
           </p>
         </div>
       </div>
