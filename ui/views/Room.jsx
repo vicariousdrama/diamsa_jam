@@ -204,8 +204,8 @@ export default function Room({room, roomId, uxConfig}) {
             </ol>
           </div>
 
-          <br />
-          {/* Audience */}
+          <hr />
+          Audience
           {!stageOnly && (
             <>
               <ol className="flex flex-wrap">
