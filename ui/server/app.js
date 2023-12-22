@@ -28,6 +28,9 @@ const urls = {
   },
 };
 
+const jamServerName = process.env.SERVER_NAME || 'Jam';
+const jamServerLogo = process.env.SERVER_LOGO || `${urls.jam}/img/jam-app-icon.jpg`;
+
 const preloadScript = getPreloadScript();
 
 let jamConfigFromFile = {};
@@ -99,11 +102,11 @@ app.use(async (req, res) => {
     let apiResponse = await result.json();
     if (apiResponse.ok) {
       console.log(apiResponse);
-      return res.send('Jam was successfully added to your workspace.');
+      return res.send(jamServerName + ' was successfully added to your workspace.');
     } else {
       console.log(apiResponse);
       return res.send(
-        'Jam was not added to your workspace, please try again later.'
+        jamServerName + ' was not added to your workspace, please try again later.'
       );
     }
   }
@@ -122,7 +125,7 @@ app.use(async (req, res) => {
       html: `<iframe src="${req.query.url}" allow="microphone *;" width="${width}" height="${height}"></iframe>`,
       width: width,
       height: height,
-      provider_name: 'Jam',
+      provider_name: jamServerName,
       provider_url: urls.jam,
     });
   }
@@ -134,7 +137,7 @@ app.use(async (req, res) => {
     const calendar = ical({
       domain: urls.jam,
       name: metaInfo.ogTitle,
-      prodId: {company: 'Jam', product: 'Jam'},
+      prodId: {company: jamServerName, product: jamServerName},
       timezone: metaInfo.schedule?.timezone,
     });
 
@@ -209,11 +212,11 @@ const escapeHtmlReplacer = function (key, value) {
 
 const pantryApiPrefix = `${urls.pantry}/api/v1/rooms`;
 const defaultMetaInfo = {
-  ogTitle: 'Jam',
+  ogTitle: jamServerName,
   ogDescription: 'Join this audio room',
   ogUrl: urls.jam,
-  ogImage: `${urls.jam}/img/jam-app-icon.jpg`,
-  favIcon: '/img/jam-app-icon.jpg',
+  ogImage: jamServerLogo,
+  favIcon: jamServerLogo,
 };
 const reservedRoutes = ['me', null];
 
@@ -229,10 +232,10 @@ async function getRoomMetaInfo(route) {
         ogTitle: roomInfo.name,
         ogDescription: roomInfo.description,
         ogUrl: `${urls.jam}/${roomId}`,
-        ogImage: roomInfo.logoURI || `${urls.jam}/img/jam-app-icon.jpg`,
+        ogImage: roomInfo.logoURI || jamServerLogo,
         color: roomInfo.color || '',
         id: roomId || '',
-        favIcon: roomInfo.logoURI || '/img/jam-app-icon.jpg',
+        favIcon: roomInfo.logoURI || jamServerLogo,
         schedule: roomInfo.schedule,
       },
       roomInfo,
