@@ -30,6 +30,10 @@ const urls = {
 
 const jamServerName = process.env.SERVER_NAME || 'Jam';
 const jamServerLogo = process.env.SERVER_LOGO || `${urls.jam}/img/jam-app-icon.jpg`;
+const jamServerOperator = process.env.SERVER_OPERATOR || 'a Friendly Nostrich';
+console.log(`jamServerName: ${jamServerName}`);
+console.log(`jamServerLogo: ${jamServerLogo}`);
+console.log(`jamServerOperator: ${jamServerOperator}`);
 
 const preloadScript = getPreloadScript();
 
