@@ -1,6 +1,6 @@
 import {decode} from './identity-utils';
 
-const DEFAULT_AVATAR = `/img/avatar-default.png`;
+const DEFAULT_AVATAR = process.env.DEFAULT_AVATAR || `/img/avatar-default.png`;
 
 const roomAvatar = (info, room, defaultAvatar) => {
   if (room.userDisplay?.identities) {
