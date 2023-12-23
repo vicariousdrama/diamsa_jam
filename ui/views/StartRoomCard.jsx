@@ -26,7 +26,7 @@ export default function StartRoomCard({
     return (
         <div>
         <a href={`./${roomId}`}>
-        <div className="select-none h-12 px-6 text-lg rounded-lg mt-3"
+        <div className="select-none h-24 px-6 text-lg rounded-lg mt-3"
              style={coloringStyle}
         >
             <div style={leftPart}
