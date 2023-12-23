@@ -205,7 +205,9 @@ export default function Room({room, roomId, uxConfig}) {
           </div>
 
           <hr />
+          <p style={{color: textColor}}>
           Audience
+          </p>
           {!stageOnly && (
             <>
               <ol className="flex flex-wrap">
