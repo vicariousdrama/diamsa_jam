@@ -47,22 +47,17 @@ function handleMessageFromServer(serverConnection, msg) {
     );
     return;
   }
-  let isok = true;
   if (topic === 'response') {
-    isok = sendMessage(connection, {t: 'response', d: data, r: requestId});
+    sendMessage(connection, {t: 'response', d: data, r: requestId});
   } else if (requestId === undefined) {
-    isok = sendMessage(connection, {t: 'server', d: {t: topic, d: data}});
+    sendMessage(connection, {t: 'server', d: {t: topic, d: data}});
   } else {
     newForwardRequest(serverConnection, requestId);
-    isok = sendMessage(connection, {
+    sendMessage(connection, {
       t: 'server',
       d: {t: topic, d: data},
       r: requestId,
     });
-  }
-  if (isok===false) {
-    // 2023122: cleanup and remove bad peer from map?
-    connection.ws.close();
   }
 }
 
@@ -100,13 +95,8 @@ async function handleMessage(connection, roomId, msg) {
       // send to one specific peer
       let {p: receiverId} = msg;
       let receiver = getConnections(roomId).find(c => c.peerId === receiverId);
-      let isok=true;
       if (receiver !== undefined) {
-        isok=sendMessage(receiver, {t: 'direct', d: data, p: senderId});
-      }
-      if (isok===false) {
-        // 2023122: cleanup and remove bad peer from map?
-        receiver.ws.close();
+        sendMessage(receiver, {t: 'direct', d: data, p: senderId});
       }
       break;
     }
@@ -114,15 +104,9 @@ async function handleMessage(connection, roomId, msg) {
       // send to all mods
       let outgoingMsg = {t: 'direct', d: data, p: senderId};
       let {moderators = []} = (await get('rooms/' + roomId)) ?? {};
-      let isok=true;
       for (let receiver of getConnections(roomId)) {
-        let isok=true;
         if (moderators.includes(getPublicKey(receiver))) {
-          isok=sendMessage(receiver, outgoingMsg);
-        }
-        if (isok===false) {
-          // 2023122: cleanup and remove bad peer from map?
-          receiver.ws.close();
+          sendMessage(receiver, outgoingMsg);
         }
       }
       break;
