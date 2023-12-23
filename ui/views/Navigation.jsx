@@ -109,7 +109,7 @@ export default function Navigation({
           </button>
         </div>
 
-        {true /*!iSpeak*/ && (
+        {(iSpeak || !iSpeak) && (
           <>
             {handRaised ? (
               <div className="mx-2">
@@ -117,7 +117,8 @@ export default function Navigation({
                   class="w-12 h-12 rounded-full flex items-center justify-center focus:outline-none"
                   style={{backgroundColor: roomColor.buttons.primary}}
                   onClick={
-                    iSpeak ? talk : () => setProps('handRaised', !handRaised)
+                    //iSpeak ? talk : () => setProps('handRaised', !handRaised)
+                    setProps('handRaised', !handRaised)
                   }
                 >
                   <svg
@@ -143,7 +144,8 @@ export default function Navigation({
                   class="w-12 h-12 rounded-full flex items-center justify-center focus:outline-none"
                   style={{backgroundColor: roomColor.buttons.primary}}
                   onClick={
-                    iSpeak ? talk : () => setProps('handRaised', !handRaised)
+                    //iSpeak ? talk : () => setProps('handRaised', !handRaised)
+                    setProps('handRaised', !handRaised)
                   }
                 >
                   <svg
