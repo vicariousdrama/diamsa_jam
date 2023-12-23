@@ -8,7 +8,7 @@ import {useMqParser} from '../lib/tailwind-mqp';
 import {useWidth} from '../lib/tailwind-mqp';
 import Navigation from './Navigation';
 import {userAgent} from '../lib/user-agent';
-import {colors} from '../lib/theme.js';
+import {colors, isDark} from '../lib/theme.js';
 import {usePushToTalk, useCtrlCombos} from '../lib/hotkeys';
 import {useJam} from '../jam-core-react';
 
@@ -117,6 +117,7 @@ export default function Room({room, roomId, uxConfig}) {
 
   const colorTheme = state.room?.color ?? 'default';
   const roomColor = colors(colorTheme);
+  const textColor = isDark(roomColor.avatarBg) ? roomColor.text.light : roomColor.text.dark;
 
   return (
     <div className="h-screen w-screen flex flex-col justify-between">
