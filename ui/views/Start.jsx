@@ -50,7 +50,7 @@ export default function Start({newRoom = {}, urlRoomId, roomFromURIError}) {
     : roomColors.text.dark;
 
   return (
-    <div className="p-0 max-w-md h-screen flex flex-col justify-evenly m-auto text-center items-center">
+    <div className="p-10 max-w-s h-screen flex flex-col justify-evenly m-auto text-center items-center">
 
       <div>
         <img src="{jamServerLogo}" />
