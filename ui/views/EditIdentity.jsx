@@ -46,7 +46,7 @@ export default function EditIdentity({close}) {
   const [showTwitterVerify, setShowTwitterVerify] = useState(false);
   const [showNostrVerify, setShowNostrVerify] = useState(false);
 
-  const processFile = (file) => {
+  const processFile = file => {
     return new Promise((res, rej) => {
       try {
         let reader = new FileReader();
