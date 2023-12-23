@@ -46,7 +46,7 @@ export default function EditIdentity({close}) {
   const [showTwitterVerify, setShowTwitterVerify] = useState(false);
   const [showNostrVerify, setShowNostrVerify] = useState(false);
 
-  const processFile = (e, file) => {
+  const processFile = (file) => {
     return new Promise((res, rej) => {
       try {
         let reader = new FileReader();
@@ -63,9 +63,9 @@ export default function EditIdentity({close}) {
     });
   };
 
-  const updateValues = async (e, file, identities) => {
+  const updateValues = async (file, identities) => {
     if (file) {
-      const avatar = await processFile({e, file});
+      const avatar = await processFile(file);
       if (!avatar) return;
       const ok = await updateInfo({name, avatar, identities});
       if (ok) close();
@@ -99,7 +99,7 @@ export default function EditIdentity({close}) {
 
     setDefaultZapsAmount(defaultZap);
 
-    await updateValues(e, selectedFile, identities);
+    await updateValues(selectedFile, identities);
   };
 
   let cancel = e => {
