@@ -188,6 +188,7 @@ export default function Room({room, roomId, uxConfig}) {
                   canSpeak={!hasMicFailed}
                   peerState={myPeerState}
                   info={myInfo}
+                  handRaised={handRaised}
                 />
               )}
               {stagePeers.map(peerId => (
@@ -199,6 +200,7 @@ export default function Room({room, roomId, uxConfig}) {
                   peerState={peerState[peerId]}
                   info={identities[peerId]}
                   onClick={iModerate ? () => setEditRole(peerId) : undefined}
+                  handRaised={handRaised}
                 />
               ))}
             </ol>
