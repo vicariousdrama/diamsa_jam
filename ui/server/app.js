@@ -109,8 +109,7 @@ app.use(async (req, res) => {
       return res.send(jamServerName + ' was successfully added to your workspace.');
     } else {
       console.log(apiResponse);
-      return res.send(
-        jamServerName + ' was not added to your workspace, please try again later.'
+      return res.send(jamServerName + ' was not added to your workspace, please try again later.'
       );
     }
   }
