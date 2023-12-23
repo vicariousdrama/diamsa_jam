@@ -32,7 +32,7 @@ export default function StartRoomCard({
             <div style={leftPart}
                 className="human-radius p-1 relative flex justify-center"
             >
-                Join {userCount} chatting in {roomId}
+                Join {userCount} chatting in <br /><br /> {roomId}
             </div>
         </div>
         </a>
