@@ -109,7 +109,7 @@ export default function Navigation({
           </button>
         </div>
 
-        {!iSpeak && (
+        {true /*!iSpeak*/ && (
           <>
             {handRaised ? (
               <div className="mx-2">
