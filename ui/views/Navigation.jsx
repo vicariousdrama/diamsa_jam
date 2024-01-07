@@ -270,10 +270,7 @@ export default function Navigation({room, editSelf, setEditSelf}) {
                     setShowStickies(s => !s);
                   }}
                 >
-                {handType === 'RH' ? '✋' : null}
-                {handType === 'TU' ? '👍' : null}
-                {handType === 'TD' ? '👎' : null}
-                {handType === 'AFK' ? 'AFK' : null}
+                {handType === 'RH' ? '✋' :( handType === 'TU' ? '👍' :( handType === 'TD' ? '👎' : handType ))}
                 </button>
               </div>
             ) : (
