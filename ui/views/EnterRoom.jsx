@@ -229,18 +229,20 @@ export default function EnterRoom({
         >
           🗓 Add to Calendar
         </a>
-        <div className="hidden">
+        <div>
           <div className={iOS ? 'mt-40 text-gray-800 text-center' : 'hidden'}>
             🎧 Use headphones or earbuds
             <br />
             for the best audio experience on iOS
           </div>
-
           <div className={macOS ? 'mt-40 text-gray-800 text-center' : 'hidden'}>
             🎧 Use Chrome or Firefox instead of Safari
             <br />
             for the best audio experience on macOS
           </div>
+          <p classnName="text-gray-600 text-sm">
+            Corny Chat simplified Terms of Service: not yet defined
+          </p>
         </div>
         {/*
             if it is a future/scheduled room this button could be replaced with
