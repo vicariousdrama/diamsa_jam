@@ -229,7 +229,7 @@ async function getRoomMetaInfo(route) {
   if (reservedRoutes.includes(route)) return {metaInfo: defaultMetaInfo};
   try {
     // remove .ics or other suffixes
-    const [roomId] = route.split('.');
+    const [roomId] = route.split('.').toLowerCase();
     const roomInfo = await (await fetch(`${pantryApiPrefix}/${roomId}`)).json();
     return {
       metaInfo: {
